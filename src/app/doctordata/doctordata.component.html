@@ -1,0 +1,389 @@
+<div>
+  <div *ngIf="this.doctorloading">
+    <div class="flex flex-row justify-center mt-5">
+      <div
+        class="animate-spin rounded-full h-16 w-16 border-b-2 top-0 left-0 border-white"
+      ></div>
+    </div>
+  </div>
+
+  <div *ngIf="!this.doctorloading">
+    <div *ngIf="this.docnotreg">
+      <div
+        class="m-5 rounded-lg text-center bg-[#423F3E] p-5 text-3xl font-bold"
+      >
+        REGISTER AS A DOCTOR TO CONTINUE ! CONTACT THE ADMIN .
+      </div>
+    </div>
+
+    <div *ngIf="!this.docnotreg">
+      <div
+        class="text-[#CC9544] font-bold text-5xl text-center items-center mt-5"
+      >
+        Hello Dr.{{ doctordata.name }} !!
+      </div>
+
+      <div *ngIf="!this.addinguser" class="flex flex-row m-5">
+        <button  (click)="openAddingUser()" class="bg-[#423F3E] p-3 text-black text-xl font-bold">
+          + ADD USER
+        </button>
+      </div>
+      <div
+        *ngIf="this.useraddedsuccess"
+        class="m-5 rounded-lg text-center bg-[#423F3E] p-5 text-xl font-bold"
+      >
+        USER ADDED ! Changes may take some time to take effect !
+      </div>
+
+      <div *ngIf="this.addinguser">
+        <div class="text-center text-gray-400 font-bold text-3xl">Add user</div>
+
+        <form #adduser="ngForm" (ngSubmit)="onSubmitAddUser(adduser.value)">
+          <div class="flex flex-col border-black border-2 m-2 mb-3">
+            <div class="flex mt-3 flex-row justify-center">
+              <div class="mr-3 text-black font-bold">Name:-</div>
+              <input
+                name="name"
+                class="mr-5"
+                type="text"
+                id="item-input"
+                ngModel
+              />
+            </div>
+            <div class="flex mt-3 flex-row justify-center">
+              <div class="mr-3 text-black font-bold">Address:-</div>
+              <input
+                name="address"
+                class="mr-5"
+                type="text"
+                id="item-input"
+                ngModel
+              />
+            </div>
+            <div class="flex mt-3 flex-row justify-center">
+              <div class="mr-3 text-black font-bold">Bp:-</div>
+              <input
+                name="bp"
+                class="mr-5"
+                type="number"
+                id="item-input"
+                ngModel
+              />
+            </div>
+            <div class="flex mt-3 flex-row justify-center">
+              <div class="mr-3 text-black font-bold">Age:-</div>
+              <input
+                name="age"
+                class="mr-5"
+                type="number"
+                id="item-input"
+                ngModel
+              />
+            </div>
+            <div class="flex mt-3 flex-row justify-center">
+              <div class="mr-3 text-black font-bold">Height:-</div>
+              <input
+                name="ht"
+                class="mr-5"
+                type="number"
+                id="item-input"
+                ngModel
+              />
+            </div>
+            <div class="flex mt-3 flex-row justify-center">
+              <div class="mr-3 text-black font-bold">Weight:-</div>
+              <input
+                name="wt"
+                class="mr-5"
+                type="number"
+                id="item-input"
+                ngModel
+              />
+            </div>
+            <div class="flex flex-row justify-center">
+              <button
+                type="submit"
+                class="bg-green-700 m-3 p-3 text-black text-xl font-bold"
+              >
+                ADD
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <div class="flex flex-row justify-center">
+        <form #fetchuser = "ngForm" (ngSubmit)="onSubmitFetchData(fetchuser.value)">
+        <input name="address" class="mr-5" type="text" id="item-input" ngModel />
+        <button type="submit" 
+          class="bg-[#423F3E] p-3 text-black text-xl font-bold rounded-xl"
+        >
+          Fetch
+        </button>
+        </form>
+      </div>
+      <div *ngIf="this.fetchloading">
+        <div class="flex flex-row justify-center mt-5">
+          <div
+            class="animate-spin rounded-full h-16 w-16 border-b-2 top-0 left-0 border-white"
+          ></div>
+        </div>
+      </div>
+
+      <div *ngIf="!(this.fetcheduserexist ) && this.fetcheduser">
+        <div
+          class="m-5 rounded-lg text-center bg-[#423F3E] p-5 text-xl font-bold"
+        >
+          USER NOT CONSULTED ! ADD TO GET STARTED !
+        </div>
+      </div>
+
+      <div *ngIf="this.fetcheduserexist">
+        <div class="bg-[#423F3E] m-5">
+          <div class="text-center text-4xl font-bold text-white m-3">
+            {{ fetcheduserdata.name }}
+          </div>
+          <div class="flex flex-row flex-wrap justify-evenly">
+            <div class="text-black font-bold text-2xl mt-3">
+              BP:- {{ fetcheduserdata.bp }}
+            </div>
+            <div class="text-black font-bold text-2xl mt-3">
+              Age:- {{ fetcheduserdata.age }}
+            </div>
+          </div>
+          <div class="flex flex-row flex-wrap justify-evenly">
+            <div class="text-black font-bold text-2xl mt-3">
+              Height:-{{ fetcheduserdata.ht }}
+            </div>
+            <div class="text-black font-bold text-2xl mt-3">
+              Weight:- {{ fetcheduserdata.wt }}
+            </div>
+          </div>
+          <div *ngIf="!this.modifyingmode">
+            <div class="flex flex-row justify-center">
+              <button  (click)="openmodifyingdetails()"
+                class="bg-orange-900 rounded-lg m-3 p-3 text-black text-xl font-bold"
+              >
+                Modify Fitness Details
+              </button>
+            </div>
+          </div>
+
+          <div *ngIf="this.modifyingsuccess">
+            <div 
+              class="m-5 rounded-lg text-center bg-[#423F3E] p-2 text-xl font-bold"
+            >Data Modified successfully. Changes may take some time to take
+              effect!
+            </div>
+          </div>
+
+          <div *ngIf="this.modifyingmode">
+            <div class="text-center text-gray-400 font-bold text-3xl">
+              Modify Details
+            </div>
+            <form #modifyfit="ngForm" (ngSubmit)="onSubmitModifyFitness(modifyfit.value)"
+            >
+              <div class="flex flex-col border-black border-2 m-2 mb-3">
+                <div class="flex mt-3 flex-row justify-center">
+                  <div class="mr-3 text-black font-bold">Name:-</div>
+                  <input
+                    name="modifiedname"
+                    class="mr-5"
+                    type="text"
+                    id="item-input"
+                    ngModel
+                  />
+                </div>
+                <div class="flex mt-3 flex-row justify-center">
+                  <div class="mr-3 text-black font-bold">Bp:-</div>
+                  <input
+                    name="modifiedbp"
+                    class="mr-5"
+                    type="number"
+                    id="item-input"
+                    ngModel
+                  />
+                </div>
+                <div class="flex mt-3 flex-row justify-center">
+                  <div class="mr-3 text-black font-bold">Age:-</div>
+                  <input
+                    name="modifiedage"
+                    class="mr-5"
+                    type="number"
+                    id="item-input"
+                    ngModel
+                  />
+                </div>
+                <div class="flex mt-3 flex-row justify-center">
+                  <div class="mr-3 text-black font-bold">Height:-</div>
+                  <input
+                    name="modifiedht"
+                    class="mr-5"
+                    type="number"
+                    id="item-input"
+                    ngModel
+                  />
+                </div>
+                <div class="flex mt-3 flex-row justify-center">
+                  <div class="mr-3 text-black font-bold">Weight:-</div>
+                  <input
+                    name="modifiedwt"
+                    class="mr-5"
+                    type="number"
+                    id="item-input"
+                    ngModel
+                  />
+                </div>
+                <div class="flex flex-row justify-center">
+                  <button
+                    type="submit"
+                
+                    class="bg-green-700 m-3 p-3 text-black text-xl font-bold"
+                  >
+                    SAVE
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <div class="text-white text-5xl font-bold text-center">Meds</div>
+
+        <div *ngIf="!this.addingmed" class="flex flex-row justify-center mt-5">
+          <button (click)="openaddmed()"  class="bg-[#423F3E] p-3 text-black text-xl font-bold">
+            + ADD MED
+          </button>
+        </div>
+        <div *ngIf="this.addmedsuccess">
+          <div
+            class="m-5 rounded-lg text-center bg-[#423F3E] p-5 text-xl font-bold"
+          >
+            Data Modified successfully. Changes may take some time to take
+            effect!
+          </div>
+        </div>
+
+        <div *ngIf="this.addingmed">
+          <form #addmed="ngForm" (ngSubmit)="onSubmitAddMed(addmed.value)">
+            <div class="flex flex-col border-black border-2 m-2 mb-3">
+              <div class="flex mt-3 flex-row justify-center">
+                <div class="mr-3 text-black font-bold">Med Name:-</div>
+                <input
+                  name="medname"
+                  class="mr-5"
+                  type="text"
+                  id="item-input"
+                  ngModel
+                />
+              </div>
+
+              <div class="flex mt-3 flex-row justify-center">
+                <div class="mr-3 text-black font-bold">
+                  Dosage (format:- 1-1-1-0):-
+                </div>
+                <input
+                  name="meddose"
+                  class="mr-5"
+                  type="text"
+                  id="item-input"
+                  ngModel
+                />
+              </div>
+              <button
+                type="submit"
+                value="submit"
+                class="bg-green-700 m-3 p-3 text-black text-xl font-bold"
+              >
+                ADD MED
+              </button>
+            </div>
+          </form>
+        </div>
+
+        <div *ngIf="this.fetchedusermedempty">
+          <div
+            class="m-5 rounded-lg text-center bg-[#423F3E] p-5 text-xl font-bold"
+          >
+            NO MEDS ADDED !
+          </div>
+        </div>
+
+        <div *ngIf="!this.fetchedusermedempty">
+          <div class="flex flex-row justify-evenly">
+            <div *ngFor="let item of fetchedusermeddata">
+              <div class="bg-[#423F3E] m-5 rounded-lg items-center p-5">
+                <div class="text-[#171010] text-2xl ml-2 font-semibold">
+                  {{ item[1] }}
+                </div>
+                <div class="text-black text-center font-bold text-xl">
+                  {{ item[2] }}
+                </div>
+                <div
+                  *ngIf="item[3]"
+                  class="text-green-400 font-bold text-xl text-center"
+                >
+                  Undertaking
+                </div>
+                <div
+                  *ngIf="!item[3]"
+                  class="text-red-400 font-bold text-xl text-center"
+                >
+                  Discontinued
+                </div>
+
+
+                <div class="flex flex-row justify-evenly">
+                  <button
+                    (click) = "discontinueMed(item[0])"
+                    *ngIf="item[3]"
+                    class="bg-red-800 rounded-md text-white p-2 m-1"
+                  >
+                    Discontinue
+                  </button>
+                  <button
+                    *ngIf="item[3] && !this.modifyingdose "
+                    (click) = "openModifyingDose()"
+                    class="bg-green-700 rounded-md text-black p-2 m-1"
+                  >
+                    Modify Dose
+                  </button>
+                  <button
+                    *ngIf="!item[3]"
+                    (click) = "reopenMed(item[0])"
+                    class="bg-green-700 rounded-md text-black p-2 m-1"
+                  >
+                    Reopen
+                  </button>
+                </div>
+
+                <div class="this.modifyingdose">
+                    <form #modifyDose = "ngForm" (ngSubmit)="onSubmitModifyDose(modifyDose.value,item[0])">
+                        <div class="flex mt-3 flex-row justify-center">
+                            <div class="mr-3 text-black font-bold">New Dose(format:- 1-1-1-0):-</div>
+                            <input
+                              name="newdose"
+                              class="mr-5"
+                              type="text"
+                              id="item-input"
+                              ngModel
+                            />
+                          </div>
+                          <button
+                          type="submit"
+                          value="submit"
+                          class="bg-green-700 m-3 p-3 text-black text-xl font-bold"
+                        >
+                          SAVE DOSE
+                        </button>
+                    </form>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
