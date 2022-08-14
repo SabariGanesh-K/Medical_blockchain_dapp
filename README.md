@@ -19,12 +19,12 @@ ng serve --open
 
 ```
 
-#DEMO:-
+## DEMO:-
 
 
 https://user-images.githubusercontent.com/64348740/184537711-780f7427-de83-48f9-b69c-c9ffbfa90c8d.mp4
 
-#SNAPS:-
+## SNAPS:-
 
 ![image](https://user-images.githubusercontent.com/64348740/180204070-17a888c8-ec5e-49be-b569-f2b3ad9d16c6.png)
 
