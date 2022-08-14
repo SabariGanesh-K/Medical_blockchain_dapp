@@ -18,6 +18,14 @@ npx hardhat run scripts/deploy.js --network fantomtest
 ng serve --open
 
 ```
+
+#DEMO:-
+
+
+https://user-images.githubusercontent.com/64348740/184537711-780f7427-de83-48f9-b69c-c9ffbfa90c8d.mp4
+
+#SNAPS:-
+
 ![image](https://user-images.githubusercontent.com/64348740/180204070-17a888c8-ec5e-49be-b569-f2b3ad9d16c6.png)
 
 ![image](https://user-images.githubusercontent.com/64348740/180204126-f33114a0-6289-4c55-afac-c9fde3593cdd.png)
